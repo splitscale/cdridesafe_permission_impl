@@ -1,14 +1,13 @@
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ridesafe_core/exceptions/service_exception.dart';
+import 'package:ridesafe_core/permission/basic_permission.dart';
 import 'package:ridesafe_core/services/permission_service.dart';
-import 'package:ridesafe_permission_impl/types/bluetooth_permissions.dart';
 
-class BluetoothPermissionService
-    implements PermissionService<BluetoothPermissionMap, BluetoothPermission> {
+class BluetoothPermissionServiceInteractor implements PermissionService {
   @override
-  BluetoothPermissionMap request() async {
+  Future<void> request() async {
     try {
-      return await [
+      await [
         Permission.bluetooth,
         Permission.bluetoothScan,
         Permission.bluetoothAdvertise,
@@ -20,9 +19,15 @@ class BluetoothPermissionService
   }
 
   @override
-  BluetoothPermission get state {
+  Future<BasicPermission> get state async {
     try {
-      return Permission.bluetooth;
+      final permission = Permission.bluetooth;
+
+      if (await permission.isGranted) {
+        return BasicPermission.isGranted();
+      } else {
+        return BasicPermission.isDenied();
+      }
     } catch (e) {
       throw ServiceException('get permission state Failed: $e');
     }
