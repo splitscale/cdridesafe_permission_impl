@@ -4,7 +4,7 @@ import 'package:ridesafe_core/services/permission_service.dart';
 import 'package:ridesafe_permission_impl/types/bluetooth_permissions.dart';
 
 class BluetoothPermissionService
-    implements PermissionService<BluetoothPermissionMap, Permission> {
+    implements PermissionService<BluetoothPermissionMap, BluetoothPermission> {
   @override
   BluetoothPermissionMap request() async {
     try {
