@@ -2,12 +2,14 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ridesafe_core/exceptions/service_exception.dart';
 import 'package:ridesafe_core/services/permission_service.dart';
 
+typedef BluetoothPermissionMap = Future<Map<Permission, PermissionStatus>>;
+
+typedef BluetoothPermission = Permission;
+
 class BluetoothPermissionService
-    implements
-        PermissionService<Future<Map<Permission, PermissionStatus>>,
-            Permission> {
+    implements PermissionService<BluetoothPermissionMap, Permission> {
   @override
-  Future<Map<Permission, PermissionStatus>> request() async {
+  BluetoothPermissionMap request() async {
     try {
       return await [
         Permission.bluetooth,
@@ -21,7 +23,7 @@ class BluetoothPermissionService
   }
 
   @override
-  Permission get state {
+  BluetoothPermission get state {
     try {
       return Permission.bluetooth;
     } catch (e) {
