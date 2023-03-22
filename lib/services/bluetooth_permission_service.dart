@@ -1,10 +1,7 @@
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ridesafe_core/exceptions/service_exception.dart';
 import 'package:ridesafe_core/services/permission_service.dart';
-
-typedef BluetoothPermissionMap = Future<Map<Permission, PermissionStatus>>;
-
-typedef BluetoothPermission = Permission;
+import 'package:ridesafe_permission_impl/types/bluetooth_permissions.dart';
 
 class BluetoothPermissionService
     implements PermissionService<BluetoothPermissionMap, Permission> {
